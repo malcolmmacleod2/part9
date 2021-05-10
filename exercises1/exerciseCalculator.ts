@@ -49,6 +49,39 @@ const getRatingDescription = (rating: Rating): RatingDescription => {
     return 'really excellent';
 }
 
-const ratings = calculateExercise([3, 0, 2, 4.5, 0, 3, 1], 2);
-console.log(ratings);
+interface ExerciseValues {
+    target: number;
+    data: Array<number>;
+}
+
+const parseExerciseArguments = (args: Array<string>): ExerciseValues => {
+    if (args.length < 4) throw new Error('Not enough arguments');
+
+    if (!isNaN(Number(args[2]))) {
+        const target = Number(args[2]);
+        let data = [];
+
+        for (let i = 3; i <= args.length; i++) {
+            if (!isNaN(Number(args[i]))) {
+                data.push(Number(args[i]));
+            }
+        }
+
+        return {
+            target: target,
+            data: data
+        }
+
+    } else {
+        throw new Error('Provided values were not numbers!');
+    }
+}
+
+try {
+    const { target, data } = parseExerciseArguments(process.argv);
+    const result = calculateExercise(data, target);
+    console.log(result);
+} catch (e) {
+    console.log('Error, something bad happened, message: ', e.message);
+}
 
