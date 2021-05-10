@@ -1,4 +1,4 @@
-type Result = 'Very severely underweight' |
+type BmiResult = 'Very severely underweight' |
     'Severely underweight' |
     'Underweight' |
     'Normal (healthy weight)' |
@@ -8,7 +8,7 @@ type Result = 'Very severely underweight' |
     'Obese Class III(Very severely obese)';
 
 
-const calculateBmi = (heightInCentimeters: number, weightInKilos: number): Result => {
+const calculateBmi = (heightInCentimeters: number, weightInKilos: number): BmiResult => {
     const height = heightInCentimeters / 100;
     const heightSquared = Math.pow(height, 2);
 
