@@ -32,7 +32,7 @@ const calculateBmi = (heightInCentimeters: number, weightInKilos: number): strin
     else {
         return 'Obese Class III(Very severely obese)';
     }
-}
+};
 
 interface BmiValues {
     heightInCentimeters: number;
@@ -47,18 +47,18 @@ const parseBmiArguments = (args: Array<string>): BmiValues => {
         return {
             heightInCentimeters: Number(args[2]),
             weightInKilos: Number(args[3])
-        }
+        };
     } else {
         throw new Error('Provided values were not numbers!');
     }
-}
+};
 
 try {
     const { heightInCentimeters, weightInKilos } = parseBmiArguments(process.argv);
     const result = calculateBmi(heightInCentimeters, weightInKilos);
     console.log(result);
 } catch (e) {
-    console.log('Error, something bad happened, message: ', e.message);
+    console.log('Error, something bad happened, error: ', e);
 }
 
-export { calculateBmi }
+export { calculateBmi };
