@@ -29,7 +29,7 @@ const calculateExercise = (hours: Array<number>, target: number): Result => {
         target: target,
         average: average
     };
-}
+};
 
 type Rating = 1 | 2 | 3;
 
@@ -40,15 +40,16 @@ const calculateRating = (totalHours: number): Rating => {
     if (totalHours < 20) { return 2; }
 
     return 3;
-}
+};
 
 const getRatingDescription = (rating: Rating): RatingDescription => {
     if (rating === 1) { return 'rubbish and you must improve'; }
     if (rating === 2) { return 'not too bad but could be better'; }
 
     return 'really excellent';
-}
+};
 
+/*
 interface ExerciseValues {
     target: number;
     data: Array<number>;
@@ -59,7 +60,7 @@ const parseExerciseArguments = (args: Array<string>): ExerciseValues => {
 
     if (!isNaN(Number(args[2]))) {
         const target = Number(args[2]);
-        let data = [];
+        const data = [];
 
         for (let i = 3; i <= args.length; i++) {
             if (!isNaN(Number(args[i]))) {
@@ -70,18 +71,21 @@ const parseExerciseArguments = (args: Array<string>): ExerciseValues => {
         return {
             target: target,
             data: data
-        }
+        };
 
     } else {
         throw new Error('Provided values were not numbers!');
     }
-}
+};
 
 try {
     const { target, data } = parseExerciseArguments(process.argv);
     const result = calculateExercise(data, target);
     console.log(result);
 } catch (e) {
-    console.log('Error, something bad happened, message: ', e.message);
+    console.log('Error, something bad happened, error: ', e);
 }
+*/
+
+export { calculateExercise };
 

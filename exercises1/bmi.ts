@@ -34,6 +34,7 @@ const calculateBmi = (heightInCentimeters: number, weightInKilos: number): strin
     }
 };
 
+/*
 interface BmiValues {
     heightInCentimeters: number;
     weightInKilos: number;
@@ -60,5 +61,6 @@ try {
 } catch (e) {
     console.log('Error, something bad happened, error: ', e);
 }
+*/
 
 export { calculateBmi };
