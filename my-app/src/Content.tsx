@@ -6,14 +6,23 @@ interface Course {
 }
 
 interface ContentProps {
-    course: Course
+    courses: Course[]
 }
 
-const Content = ({course}: ContentProps): JSX.Element => {
+const Content = ({courses}: ContentProps): JSX.Element => {
     return (
-        <p>
-            {course.name} {course.exerciseCount}
-        </p>
+    <div>
+      <p>
+        {courses[0].name} {courses[0].exerciseCount}
+      </p>
+      <p>
+        {courses[1].name} {courses[1].exerciseCount}
+      </p>
+      <p>
+        {courses[2].name} {courses[2].exerciseCount}
+      </p>
+    </div>
+      
     )
 };
 
