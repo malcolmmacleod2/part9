@@ -19,13 +19,18 @@ interface CourseProjectPart extends CoursePartBase {
 }
 
 interface CourseSubmissionPart extends CourseDescriptionPart {
-  type: "submission"
+  type: "submission";
   exerciseSubmissionLink: string;
+}
+
+interface CourseRequirementsPart extends CourseDescriptionPart {
+    type: "special";
+    requirements: string[];
 }
 
 
 
-type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart;
+type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart | CourseRequirementsPart;
 
 export type { CoursePart }
 

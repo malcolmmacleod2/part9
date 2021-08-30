@@ -9,7 +9,7 @@ interface ContentProps {
 const Content = ({courses}: ContentProps): JSX.Element => {
     return (
     <div>
-      {courses.map((part: CoursePart) =><Part key={part.name} part={part}></Part>)};
+      {courses.map((part: CoursePart) =><Part key={part.name} part={part}></Part>)}
     </div>
     )
 };

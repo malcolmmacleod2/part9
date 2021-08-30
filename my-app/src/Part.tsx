@@ -10,7 +10,7 @@ const Part = ({part}: PartProps): JSX.Element => {
         case "normal":
             return (
                 <div>
-                    <p>Name: {part.name}</p>
+                    <p><b>Name: {part.name}</b></p>
                     <p>Exercise Count: {part.exerciseCount}</p>
                     <p>Description: {part.description}</p>
                 </div>
@@ -18,7 +18,7 @@ const Part = ({part}: PartProps): JSX.Element => {
         case "groupProject":
             return (
                 <div>
-                    <p>Name: {part.name}</p>
+                    <p><b>Name: {part.name}</b></p>
                     <p>Exercise Count: {part.exerciseCount}</p>
                     <p>Group project count: {part.groupProjectCount}</p>
                 </div>
@@ -27,10 +27,20 @@ const Part = ({part}: PartProps): JSX.Element => {
         case "submission":
             return (
                 <div>
-                    <p>Name: {part.name}</p>
+                    <p><b>Name: {part.name}</b></p>
                     <p>Exercise Count: {part.exerciseCount}</p>
                     <p>Description: {part.description}</p>
                     <p>Exercise Submission Link: {part.exerciseSubmissionLink} </p>
+                </div>
+            );
+
+        case "special":
+            return (
+                <div>
+                    <p><b>Name: {part.name}</b></p>
+                    <p>Exercise Count: {part.exerciseCount}</p>
+                    <p>Description: {part.description}</p>
+                    <p>Required skills: {part.requirements.join(', ')} </p>
                 </div>
             );
     }
