@@ -1,3 +1,4 @@
+import { EntryWithoutId } from './Entry';
 import { Gender } from './Gender';
 
 export interface Entry {
