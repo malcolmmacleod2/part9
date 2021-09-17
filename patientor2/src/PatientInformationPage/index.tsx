@@ -3,11 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Container } from "semantic-ui-react";
 import { apiBaseUrl } from "../constants";
-import { Patient } from "../types";
+import { Entry, Patient, Diagnosis } from '../types';
 import { setPatientInfo, useStateValue } from "../state";
 import GenderIcon from '../components/GenderIcon';
-
-
 
 const PatientInformationPage = () => {
 
@@ -23,6 +21,7 @@ const PatientInformationPage = () => {
         const { data: patientInfo } = await axios.get<Patient>(
           `${apiBaseUrl}/patients/${id}`
         );
+
         dispatch(setPatientInfo(patientInfo));
       } catch (e) {
         console.error(e);
@@ -44,6 +43,24 @@ const PatientInformationPage = () => {
         </div>
         <p>SSN: {patient && patient.ssn}</p>
         <p>Occupation: {patient && patient.occupation}</p>
+        <h4>Entries</h4>
+        <div>
+          { patient && patient.entries.map((entry: Entry) => 
+            (
+              
+              <div key={entry.id}>
+                <p>{entry.date} <em>{entry.description}</em></p>
+                <ul>
+                { entry.diagnosisCodes && entry.diagnosisCodes.map((d: Diagnosis['code']) => (
+                  <li key={d}>{d}</li>
+                ))}
+                </ul>
+
+              </div>
+            )
+          )}
+          
+        </div>
       </Container>
     </div>
     );
