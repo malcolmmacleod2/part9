@@ -6,6 +6,7 @@ import { apiBaseUrl } from "../constants";
 import { Entry, Patient } from '../types';
 import { setPatientInfo, useStateValue } from "../state";
 import GenderIcon from '../components/GenderIcon';
+import EntryDetails from '../components/EntryDetails';
 
 const PatientInformationPage = () => {
 
@@ -52,11 +53,11 @@ const PatientInformationPage = () => {
             (
               
               <div key={entry.id}>
-                <p>{entry.date} <em>{entry.description}</em></p>
-                <p>{diagnoses.length}</p>
+                <EntryDetails entry={entry} />
+
                 <ul>
                 { entry.diagnosisCodes && entry.diagnosisCodes.map((d: string) => (
-                  <li key={d}>{d} {diagnoses[d].name}</li>
+                  <li key={d}>{diagnoses[d].name}</li>
                 ))}
                 </ul>
 
