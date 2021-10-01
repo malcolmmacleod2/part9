@@ -1,7 +1,7 @@
 import express from 'express';
 import patientsData from '../services/patientsData';
 import getPatients from '../services/patientsData';
-import toNewPatient from '../utils/utilityFunctions';
+import { toNewPatient, toNewEntry} from '../utils/utilityFunctions';
 
 const router = express.Router();
 
@@ -27,6 +27,21 @@ router.post('/', (req, res) => {
     const addedPatient = patientsData.addPatient(newPatient);
 
     res.json(addedPatient);
+})
+
+router.post('/:id/entries', (req, res) => {
+
+    const id = req.params.id;
+    let patient = getPatients.getPatient(id);
+
+    if (patient) {
+        const newEntry = toNewEntry(req.body);
+        const updatedPatient = patientsData.addEntryForPatient(patient, newEntry);
+
+        res.json(updatedPatient);
+    } else {
+        res.status(404).end();
+    }
 })
 
 export default router;

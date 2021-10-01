@@ -1,4 +1,4 @@
-import { Diagnosis } from '../../../patientor/src/types';
+import { Diagnose } from './Diagnose';
 
 interface BaseEntry {
   id: string;
@@ -6,7 +6,7 @@ interface BaseEntry {
   date: string;
   specialist: string;
   type: string;
-  diagnosisCodes?: Array<Diagnosis['code']>;
+  diagnosisCodes?: Array<Diagnose['code']>;
 }
 
 export enum HealthCheckRating {
@@ -21,22 +21,25 @@ interface HealthCheckEntry extends BaseEntry {
   healthCheckRating: HealthCheckRating;
 }
 
-interface Discharge {
+export interface Discharge {
     date: string;
     criteria: string;
 }
 
 interface HospitalEntry extends BaseEntry {
-    discharge: Discharge;
+  type: "Hospital";
+  discharge: Discharge;
 }
 
-interface SickLeave {
+export interface SickLeave {
     startDate: string;
     endDate: string;
 }
 
 interface OccupationalHealthcareEntry extends BaseEntry {
-    sickLeave: SickLeave;
+  type: "OccupationalHealthcare";
+  sickLeave?: SickLeave;
+  employerName: string;
 }
 
 export type Entry =

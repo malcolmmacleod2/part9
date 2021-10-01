@@ -1,9 +1,5 @@
-import { EntryWithoutId } from './Entry';
+import { Entry } from './Entry';
 import { Gender } from './Gender';
-
-export interface Entry {
-
-}
 
 export interface Patient {
     id: string;
