@@ -1,14 +1,26 @@
 import React, {useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Container } from "semantic-ui-react";
+import { Button, Container } from "semantic-ui-react";
 import { apiBaseUrl } from "../constants";
 import { Entry, Patient } from '../types';
 import { setPatientInfo, useStateValue } from "../state";
 import GenderIcon from '../components/GenderIcon';
 import EntryDetails from '../components/EntryDetails';
+import { HospitalEntryFormValues } from "../AddEntryModal/AddHospitalEntryForm";
+import AddEntryModal from "../AddEntryModal";
 
 const PatientInformationPage = () => {
+
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<string | undefined>();
+
+  const openModal = (): void => setModalOpen(true);
+
+  const closeModal = (): void => {
+    setModalOpen(false);
+    setError(undefined);
+  };
 
   const { id } = useParams<{ id: string }>();
   console.log(id);
@@ -38,6 +50,23 @@ const PatientInformationPage = () => {
 
   }, [dispatch]);
 
+   const submitNewEntry = async (values: HospitalEntryFormValues) => {
+    try {
+      if (patient && patient.id) {
+        const { data: updatedPatient } = await axios.post<Patient>(
+                `${apiBaseUrl}/patients/${patient.id}/entries`,
+                values
+              );
+        dispatch(setPatientInfo(updatedPatient));
+      }
+
+      closeModal();
+    } catch (e) {
+      console.error(e.response?.data || 'Unknown Error');
+      setError(e.response?.data?.error || 'Unknown error');
+    }
+  };
+
     return (
     <div className="App">
       <Container>
@@ -66,6 +95,15 @@ const PatientInformationPage = () => {
           )}
           
         </div>
+
+        <AddEntryModal
+          modalOpen={modalOpen}
+          onSubmit={submitNewEntry}
+          error={error}
+          onClose={closeModal}
+        />
+
+        <Button onClick={() => openModal()}>Add New Entry</Button>
       </Container>
     </div>
     );
