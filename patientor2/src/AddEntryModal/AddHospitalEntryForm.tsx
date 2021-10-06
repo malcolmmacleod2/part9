@@ -35,25 +35,34 @@ const AddHospitalEntryForm = ({ onSubmit, onCancel }: Props) => {
     onSubmit={onSubmit}
     validate={values => {
       const requiredError = "Field is required";
-        const errors: { [field: string]: string } = {};
-        if (!values.description) {
-          errors.description = requiredError;
-        }
-        if (!values.specialist) {
-          errors.specialist = requiredError;
-        }
-        if (!values.date) {
-          errors.date = requiredError;
-        }
-        if (!values.discharge.date) {
-          errors.discharge = requiredError;
-        }
-        if (!values.discharge.criteria) {
-          errors.discharge = requiredError;
-        }
+      const invalidDateError = "Date field is invalid";
 
-        return errors;
-    }}
+      const errors: { [field: string]: string } = {};
+      if (!values.description) {
+        errors.description = requiredError;
+      }
+      if (!values.specialist) {
+        errors.specialist = requiredError;
+      }
+      if (!values.date) {
+        errors.date = requiredError;
+      } else if (!Date.parse(values.date)) {
+        errors.date = invalidDateError;
+      }
+
+      if (!values.discharge.date) {
+        errors.discharge_date = requiredError;
+      } else if (!Date.parse(values.discharge.date)) {
+        errors.discharge_date = invalidDateError;
+      }
+
+      if (!values.discharge.criteria) {
+        errors.discharge_criteria = requiredError;
+      }
+
+      return errors;
+    }
+  }
   >
     {({ isValid, dirty, setFieldValue, setFieldTouched }) => {
 
@@ -87,13 +96,13 @@ const AddHospitalEntryForm = ({ onSubmit, onCancel }: Props) => {
           <Field
             label="Discharge Criteria"
             placeholder="Discharge Criteria"
-            name="discharge.criteria"
+            name="discharge_criteria"
             component={TextField}
           />
           <Field
             label="Discharge Date"
             placeholder="YYYY-MM-DD"
-            name="discharge.date"
+            name="discharge_date"
             component={TextField}
           />
 
