@@ -8,6 +8,7 @@ import { setPatientInfo, useStateValue } from "../state";
 import GenderIcon from '../components/GenderIcon';
 import EntryDetails from '../components/EntryDetails';
 import { HospitalEntryFormValues } from "../AddEntryModal/AddHospitalEntryForm";
+import { HealthCheckEntryFormValues } from '../AddEntryModal/AddHealthCheckEntryForm';
 import AddEntryModal from "../AddEntryModal";
 
 const PatientInformationPage = () => {
@@ -50,7 +51,7 @@ const PatientInformationPage = () => {
 
   }, [dispatch]);
 
-   const submitNewEntry = async (values: HospitalEntryFormValues) => {
+   const submitNewEntry = async (values: HospitalEntryFormValues | HealthCheckEntryFormValues) => {
     try {
       if (patient && patient.id) {
         const { data: updatedPatient } = await axios.post<Patient>(
