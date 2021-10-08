@@ -10,6 +10,7 @@ import EntryDetails from '../components/EntryDetails';
 import { HospitalEntryFormValues } from "../AddEntryModal/AddHospitalEntryForm";
 import { HealthCheckEntryFormValues } from '../AddEntryModal/AddHealthCheckEntryForm';
 import AddEntryModal from "../AddEntryModal";
+import { OccupationalHealthcareEntryFormValues } from '../AddEntryModal/AddOccupationalHealthcareEntryForm';
 
 const PatientInformationPage = () => {
 
@@ -51,7 +52,7 @@ const PatientInformationPage = () => {
 
   }, [dispatch]);
 
-   const submitNewEntry = async (values: HospitalEntryFormValues | HealthCheckEntryFormValues) => {
+   const submitNewEntry = async (values: HospitalEntryFormValues | HealthCheckEntryFormValues | OccupationalHealthcareEntryFormValues) => {
     try {
       if (patient && patient.id) {
         const { data: updatedPatient } = await axios.post<Patient>(
@@ -99,6 +100,7 @@ const PatientInformationPage = () => {
           modalOpen={modalOpen}
           onHospitalSubmit={submitNewEntry}
           onHealthCheckSubmit={submitNewEntry}
+          onOccupationalHealthcareSubmit={submitNewEntry}
           error={error}
           onClose={closeModal}
         />
