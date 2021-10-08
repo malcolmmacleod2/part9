@@ -81,7 +81,6 @@ const PatientInformationPage = () => {
         <div>
           { patient && patient.entries.map((entry: Entry) => 
             (
-              
               <div key={entry.id}>
                 <EntryDetails entry={entry} />
 
@@ -90,7 +89,6 @@ const PatientInformationPage = () => {
                   <li key={d}>{diagnoses[d].name}</li>
                 ))}
                 </ul>
-
               </div>
             )
           )}
@@ -99,7 +97,8 @@ const PatientInformationPage = () => {
 
         <AddEntryModal
           modalOpen={modalOpen}
-          onSubmit={submitNewEntry}
+          onHospitalSubmit={submitNewEntry}
+          onHealthCheckSubmit={submitNewEntry}
           error={error}
           onClose={closeModal}
         />

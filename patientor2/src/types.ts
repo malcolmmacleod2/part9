@@ -1,3 +1,4 @@
+
 export interface Diagnosis {
   code: string;
   name: string;
@@ -65,3 +66,4 @@ export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
+

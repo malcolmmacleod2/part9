@@ -3,8 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import { Button, Grid } from 'semantic-ui-react';
 import { DiagnosisSelection, NumberField, TextField } from '../AddPatientModal/FormField';
 import { useStateValue } from '../state';
-import { HealthCheckEntry } from '../types';
-import { HealthCheckRating } from '../../../exercises2/src/types/Entry';
+import { HealthCheckEntry, HealthCheckRating } from '../types';
 
 /*
  * use type Entry, but omit id,
@@ -33,6 +32,7 @@ const AddHealthCheckEntryForm = ({ onSubmit, onCancel }: Props) => {
     onSubmit={onSubmit}
     validate={values => {
       const requiredError = "Field is required";
+      const invalidHealthCheckError = "Rating is invalid";
         const errors: { [field: string]: string } = {};
         if (!values.description) {
           errors.description = requiredError;
@@ -44,7 +44,9 @@ const AddHealthCheckEntryForm = ({ onSubmit, onCancel }: Props) => {
           errors.date = requiredError;
         }
         if (!values.healthCheckRating) {
-          errors.discharge = requiredError;
+          errors.healthCheckRating = requiredError;
+        } else if (!Object.values(HealthCheckRating).includes(values.healthCheckRating)) {
+          errors.healthCheckRating = invalidHealthCheckError;
         }
 
         return errors;

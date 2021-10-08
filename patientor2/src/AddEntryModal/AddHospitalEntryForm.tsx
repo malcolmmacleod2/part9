@@ -50,14 +50,14 @@ const AddHospitalEntryForm = ({ onSubmit, onCancel }: Props) => {
         errors.date = invalidDateError;
       }
 
-      if (!values.discharge.date) {
-        errors.discharge_date = requiredError;
+      if (!values.discharge?.date) {
+        errors['discharge.date'] = requiredError;
       } else if (!Date.parse(values.discharge.date)) {
-        errors.discharge_date = invalidDateError;
-      }
+        errors['discharge.date'] = invalidDateError;
+      } 
 
-      if (!values.discharge.criteria) {
-        errors.discharge_criteria = requiredError;
+      if (!values.discharge?.criteria) {
+        errors['discharge.criteria'] = requiredError;
       }
 
       return errors;
@@ -96,13 +96,13 @@ const AddHospitalEntryForm = ({ onSubmit, onCancel }: Props) => {
           <Field
             label="Discharge Criteria"
             placeholder="Discharge Criteria"
-            name="discharge_criteria"
+            name="discharge.criteria"
             component={TextField}
           />
           <Field
             label="Discharge Date"
             placeholder="YYYY-MM-DD"
-            name="discharge_date"
+            name="discharge.date"
             component={TextField}
           />
 
